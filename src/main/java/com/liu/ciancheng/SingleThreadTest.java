@@ -9,7 +9,9 @@ public class SingleThreadTest {
      * **/
     public static void main(String[] args) {
         SingleThread thread = new SingleThread();
+        PrintThread printThread = new PrintThread();
         thread.start();
+        printThread.start();
     }
 }
 //1.创建一个继承thread的类
@@ -19,7 +21,17 @@ class SingleThread extends Thread{
 //        输出0到100之间的偶数
         for (int i = 0; i <= 100; i++) {
             if(i%2 == 0){
-                System.out.println(i);
+                System.out.println(Thread.currentThread().getName()+":"+i);
+            }
+        }
+    }
+}
+class PrintThread extends Thread{
+    @Override
+    public void run() {
+        for (int i = 0; i <= 100; i++) {
+            if (i%2 != 0){
+                System.out.println(Thread.currentThread().getName()+":"+i);
             }
         }
     }
